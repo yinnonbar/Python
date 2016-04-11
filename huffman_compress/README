@@ -1,0 +1,82 @@
+====================================
+Huffman Compression
+====================================
+
+=======
+Usuage:
+=======
+
+python3.3 simulations.py [-h] [-o OUTFILE] [-s SUFFIX] [-f] [-l LEVEL] 
+			 [-a] infile
+
+========================
+List of submitted files:
+========================
+
+    README:
+	This file.
+
+    hzlib.py
+	This file contains some functions that used to compress and decompress 
+	in hufmman comperssing method.  
+
+============
+Description: 
+============
+
+hzlib.py - this file contains the following functions:
+    symbol_count(data)
+	This function gets as input the data and return as output
+    	an dictionary which contains every character in data and number of times
+    	that every one of them shows in the data.
+    
+    
+    make_huffman_tree(counter):
+        This function gets as input counter which is the dictionary from the 
+	previous function that shows for every character the number it is 
+	in the string and return as output a binary tree which built in the
+	model of huffman coding for the frequent which exists in counter.
+
+    build_codebook(huff_tree):
+    	This function gets as input a binary tree that represent the huffman 
+	code and gives as output a dictionary which it's key is the char and
+	the value is a tuple contating the length of bytes needed to represent 
+	the number and a number which is the decimal value of the code.
+	
+    build_canonical_codebook(codebook):
+        This function gets as input the codebook which we've created in 
+	build_codebook and return as output a canonical_codebook table.
+
+    build_decodebook(codebook):
+        This function gets as input the codebook which we've created in 
+	build_codebook and returns as output a dictionary which maps bytes 
+	sequence to the matchs chars.
+    
+    compress(corpus, codebook):
+    	This function gets as input the codebook which we've created in 
+	build_codebook and a corpus and yields as output 0 or 1 as the value of 
+	the binary presentation. 
+    
+    decompress(bits, decodebook):
+        This function gets as input the decodebook and a sequence of bits 
+	and yields as output the match value for the bite/s.
+
+    pad(bits):          
+	This function gets as input a sequence of bits and yields as output the 
+	value of byte an integer between 0 and 255.
+
+    unpad(byteseq):
+	This function gets as input a byte's sequence and is the reversed action
+	of pad, means remove the 1 and zeros in the end and yields 1 or 0.
+
+    join(data, codebook):   
+	This function gets as input a codebook which is a canonical table and 
+	data which is a sequence value of bytes and yields as output first the
+        presentation of codebook as sequence of bytes and than the values from 
+	data.
+
+    split(byteseq):
+        This function gets as input byteseq, split it to data and codebook and
+        yields as output a tuple which it's first value is a canonic table
+        represented by 256 first bytes in bytseq and the second value is an 
+        iterator which pass on byteseq as value of bytes.
